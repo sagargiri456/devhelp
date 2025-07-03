@@ -25,7 +25,7 @@ const Doubts = () => {
   // Fetching the doubts from the database.
   const fetchDoubts = async () => {
     try {
-      const res = await API.get("/doubts/my"); // ✅ updated endpoint
+      const res = await API.get("/doubts/my"); 
       setDoubts(res.data);
     } catch (error) {
       console.error("Error fetching doubts:", error);
