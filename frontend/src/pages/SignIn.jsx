@@ -15,7 +15,11 @@ const SignIn = () => {
     try {
       const res = await API.post("/auth/login", form);
       login(res.data);
-      navigate("/doubts");
+      if (res.data.role === "mentor") {
+        navigate("/mentor");
+      } else {
+        navigate("/doubts");
+      }
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
     }
