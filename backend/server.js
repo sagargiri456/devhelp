@@ -24,7 +24,7 @@ app.use(fileUpload({ useTempFiles: true }));
 // ✅ Routes
 app.use("/api/doubts", doubtRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/comment", commentRoutes);
+app.use("/api/comments", commentRoutes);
 app.use("/api/notifications", notificationRoutes);
 
 // ✅ Serve frontend in production (safe version)

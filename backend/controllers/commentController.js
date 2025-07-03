@@ -4,7 +4,7 @@ exports.createComment = async (req, res) => {
   try {
     const { doubtId } = req.params;
     const { message } = req.body;
-    const mentorId = req.user.id; // from JWT
+    const mentorId = req.user.id; 
 
     const comment = new Comment({ doubtId, mentorId, message });
     await comment.save();
