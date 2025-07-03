@@ -14,7 +14,7 @@ const app = express();
 
 // ✅ Middlewares
 app.use(cors({
-  origin: "https://devhelp-taupe.vercel.app", // ✅ replace with your actual frontend URL
+  origin: ["http://localhost:5173","https://devhelp-taupe.vercel.app"], // ✅ replace with your actual frontend URL
   credentials: true,
 }));
 
