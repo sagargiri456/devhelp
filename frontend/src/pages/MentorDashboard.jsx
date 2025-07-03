@@ -78,25 +78,7 @@ const MentorDashboard = () => {
           </div>
         </section>
 
-        {/* Doubt Post Section (Example) */}
-        <section className="mb-12">
-          <div className="bg-gradient-to-r from-purple-800 to-indigo-800 rounded-3xl p-8 shadow-2xl transform transition-transform duration-500 hover:scale-[1.01] hover:shadow-3xl">
-            <h2 className="text-3xl font-extrabold text-white mb-4 text-center">
-              Have something to share with students?
-            </h2>
-            <p className="text-lg text-gray-200 mb-6 text-center">
-              Post an announcement, a helpful resource, or a new challenge for your mentees.
-            </p>
-            <div className="flex justify-center">
-              <Link
-                to="/mentor/post-announcement" 
-                className="bg-white text-purple-800 px-8 py-4 rounded-full text-xl font-bold hover:bg-purple-100 transition-all duration-300 shadow-lg transform hover:-translate-y-1"
-              >
-                Create a New Post &rarr;
-              </Link>
-            </div>
-          </div>
-        </section>
+
 
         {/* Loading, Error, and No Doubts State */}
         {loading && (
