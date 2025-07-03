@@ -43,97 +43,130 @@ const MentorDashboard = () => {
 
   return (
     <div className="min-h-screen p-6 bg-gradient-to-br from-[#1A0C38] via-[#2A0F5B] to-[#3A127E] text-white font-sans">
-      <div className="max-w-6xl mx-auto py-8">
-        <h1 className="text-4xl font-extrabold mb-8 text-center tracking-wide text-white drop-shadow-lg">
+      <div className="max-w-7xl mx-auto py-8">
+        <h1 className="text-5xl font-extrabold mb-12 text-center tracking-tight text-white drop-shadow-lg animate-fade-in-down">
           Mentor Dashboard
         </h1>
 
         {/* Filter Buttons */}
-        <div className="mb-8 flex flex-wrap justify-center gap-4 p-4 rounded-xl bg-gray-800 bg-opacity-50 shadow-inner">
-          <button
-            onClick={() => setFilter("all")}
-            className={`px-6 py-2 rounded-lg text-lg font-medium transition-all duration-300 ease-in-out
-              ${filter === "all" ? "bg-purple-600 text-white shadow-md" : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white"}
-            `}
-          >
-            All Doubts
-          </button>
-          <button
-            onClick={() => setFilter("open")}
-            className={`px-6 py-2 rounded-lg text-lg font-medium transition-all duration-300 ease-in-out
-              ${filter === "open" ? "bg-green-600 text-white shadow-md" : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white"}
-            `}
-          >
-            Open Doubts
-          </button>
-          <button
-            onClick={() => setFilter("resolved")}
-            className={`px-6 py-2 rounded-lg text-lg font-medium transition-all duration-300 ease-in-out
-              ${filter === "resolved" ? "bg-blue-600 text-white shadow-md" : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white"}
-            `}
-          >
-            Resolved Doubts
-          </button>
-        </div>
+        <section className="mb-12">
+          <div className="flex flex-wrap justify-center gap-4 p-5 rounded-2xl bg-gray-900 bg-opacity-60 shadow-2xl backdrop-blur-sm border border-gray-700">
+            <button
+              onClick={() => setFilter("all")}
+              className={`px-8 py-3 rounded-xl text-lg font-semibold transition-all duration-300 ease-in-out transform hover:scale-105
+                ${filter === "all" ? "bg-purple-700 text-white shadow-lg border border-purple-500" : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white border border-gray-600"}
+              `}
+            >
+              All Doubts
+            </button>
+            <button
+              onClick={() => setFilter("open")}
+              className={`px-8 py-3 rounded-xl text-lg font-semibold transition-all duration-300 ease-in-out transform hover:scale-105
+                ${filter === "open" ? "bg-green-600 text-white shadow-lg border border-green-500" : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white border border-gray-600"}
+              `}
+            >
+              Open Doubts
+            </button>
+            <button
+              onClick={() => setFilter("resolved")}
+              className={`px-8 py-3 rounded-xl text-lg font-semibold transition-all duration-300 ease-in-out transform hover:scale-105
+                ${filter === "resolved" ? "bg-blue-600 text-white shadow-lg border border-blue-500" : "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white border border-gray-600"}
+              `}
+            >
+              Resolved Doubts
+            </button>
+          </div>
+        </section>
 
+        {/* Doubt Post Section (Example) */}
+        <section className="mb-12">
+          <div className="bg-gradient-to-r from-purple-800 to-indigo-800 rounded-3xl p-8 shadow-2xl transform transition-transform duration-500 hover:scale-[1.01] hover:shadow-3xl">
+            <h2 className="text-3xl font-extrabold text-white mb-4 text-center">
+              Have something to share with students?
+            </h2>
+            <p className="text-lg text-gray-200 mb-6 text-center">
+              Post an announcement, a helpful resource, or a new challenge for your mentees.
+            </p>
+            <div className="flex justify-center">
+              <Link
+                to="/mentor/post-announcement" 
+                className="bg-white text-purple-800 px-8 py-4 rounded-full text-xl font-bold hover:bg-purple-100 transition-all duration-300 shadow-lg transform hover:-translate-y-1"
+              >
+                Create a New Post &rarr;
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Loading, Error, and No Doubts State */}
         {loading && (
-          <p className="text-center text-xl text-gray-400 mt-10">Loading doubts...</p>
+          <p className="text-center text-2xl text-purple-300 mt-16 animate-pulse">
+            Loading doubts...
+          </p>
         )}
         {error && (
-          <p className="text-center text-xl text-red-500 mt-10">{error}</p>
+          <p className="text-center text-2xl text-red-400 mt-16">
+            Error: {error}
+          </p>
         )}
 
         {!loading && !error && filteredDoubts.length === 0 ? (
-          <p className="text-center text-xl text-gray-400 mt-10">
-            No {filter === "all" ? "" : filter} doubts found.
+          <p className="text-center text-2xl text-gray-400 mt-16">
+            No {filter === "all" ? "" : filter} doubts found at the moment.
           </p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredDoubts.map((doubt) => (
-              <div
-                key={doubt._id} // Make sure _id is consistent
-                className="bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 ease-in-out overflow-hidden flex flex-col"
-              >
-                {/* Optional: Doubt title as link to detail page */}
-                <Link to={`/doubts/${doubt._id}`} className="block p-5 pb-3">
-                  <h2 className="text-2xl font-bold text-white mb-2 leading-tight hover:text-blue-400 transition-colors duration-200">
-                    {doubt.title}
-                  </h2>
-                  <p className="text-gray-300 text-sm line-clamp-3 mb-4">
-                    {doubt.description}
-                  </p>
-                </Link>
-
-                {/* Screenshot preview (if available) */}
-                {doubt.screenshotUrl && (
-                  <div className="flex-shrink-0 w-full"> {/* Ensure image scales */}
-                    <img
-                      src={doubt.screenshotUrl}
-                      alt="Screenshot"
-                      className="w-full h-48 object-cover border-t border-gray-700" // object-cover to prevent distortion
-                    />
-                  </div>
-                )}
-
-                <div className="p-5 pt-3 mt-auto flex justify-between items-end border-t border-gray-700">
-                  {/* Status Badge */}
-                  <span
-                    className={`inline-block px-4 py-1 text-sm font-semibold rounded-full
-                      ${doubt.status === "open" ? "bg-green-500 text-white" : "bg-blue-500 text-white"}
-                    `}
-                  >
-                    {doubt.status.charAt(0).toUpperCase() + doubt.status.slice(1)} {/* Capitalize status */}
-                  </span>
-                  <Link
-                    to={`/doubts/${doubt._id}`}
-                    className="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200"
-                  >
-                    View Details &rarr;
+          <section>
+            <h2 className="text-4xl font-extrabold text-white mb-8 text-center tracking-wide drop-shadow-md">
+              Browse Student Doubts
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredDoubts.map((doubt) => (
+                <div
+                  key={doubt._id}
+                  className="bg-gray-800 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out overflow-hidden flex flex-col transform hover:-translate-y-2 border border-gray-700"
+                >
+                  {/* Optional: Doubt title as link to detail page */}
+                  <Link to={`/doubts/${doubt._id}`} className="block p-6 pb-4 flex-grow">
+                    <h2 className="text-3xl font-bold text-white mb-3 leading-tight hover:text-blue-400 transition-colors duration-200">
+                      {doubt.title}
+                    </h2>
+                    <p className="text-gray-300 text-base line-clamp-3 mb-4">
+                      {doubt.description}
+                    </p>
                   </Link>
+
+                  {/* Screenshot preview (if available) */}
+                  {doubt.screenshotUrl && (
+                    <div className="flex-shrink-0 w-full overflow-hidden">
+                      <img
+                        src={doubt.screenshotUrl}
+                        alt="Screenshot"
+                        className="w-full h-52 object-cover object-center border-t border-gray-700 transform hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  )}
+
+                  <div className="p-6 pt-4 mt-auto flex justify-between items-center border-t border-gray-700">
+                    {/* Status Badge */}
+                    <span
+                      className={`inline-block px-5 py-2 text-md font-semibold rounded-full shadow-md
+                        ${doubt.status === "open" ? "bg-green-500 text-white" : "bg-blue-500 text-white"}
+                      `}
+                    >
+                      {doubt.status.charAt(0).toUpperCase() + doubt.status.slice(1)}
+                    </span>
+                    <Link
+                      to={`/doubts/${doubt._id}`}
+                      className="text-blue-400 hover:text-blue-300 font-bold text-lg transition-colors duration-200 flex items-center"
+                    >
+                      View Details
+                      <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </section>
         )}
       </div>
     </div>
