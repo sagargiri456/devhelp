@@ -13,7 +13,11 @@ const notificationRoutes = require("./routes/notificationRoutes");
 const app = express();
 
 // ✅ Middlewares
-app.use(cors());
+app.use(cors({
+  origin: "https://devhelp-taupe.vercel.app", // ✅ replace with your actual frontend URL
+  credentials: true,
+}));
+
 app.use(express.json()); // preferred over body-parser
 app.use(fileUpload({ useTempFiles: true }));
 
