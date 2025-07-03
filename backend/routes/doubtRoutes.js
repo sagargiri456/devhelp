@@ -1,7 +1,6 @@
 const express = require("express");
-const { getDoubts,markAsResolved, getAllDoubts, addDoubt, deleteDoubt, reopenDoubt, getDoubtById } = require("../controllers/doubtControllers");
+const { getDoubts,markAsResolved, getDoubtsByStudent, getAllDoubts, addDoubt, deleteDoubt, reopenDoubt, getDoubtById } = require("../controllers/doubtControllers");
 const { verifyMentor, protect, verifyStudent, verifyToken } = require("../middlewares/authMiddleware");
-const { getDoubtsByStudent } = require("../controllers/doubtController");
 
 const router = express.Router();
 
