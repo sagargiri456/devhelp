@@ -15,7 +15,7 @@ const SignIn = () => {
     try {
       const res = await API.post("/auth/login", form);
       login(res.data);
-      if (res.data.role === "mentor") {
+      if (res.data.role === "student") {
         navigate("/mentor");
       } else {
         navigate("/doubts");
