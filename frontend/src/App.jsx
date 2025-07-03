@@ -10,7 +10,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
 import MentorDashboard from "./pages/MentorDashboard";
 import { AuthProvider } from "./context/AuthContext"; 
-import DoubtDetail from "./components/doubtDetails";
+import DoubtDetail from "./components/DoubtDetails";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
